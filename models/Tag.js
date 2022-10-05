@@ -7,6 +7,19 @@ class Tag extends Model {}
 Tag.init(
   {
     // define columns
+
+    // 10/05/2022 BZ - Added tag table definitions.
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    tag_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    
   },
   {
     sequelize,

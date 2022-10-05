@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
 
-  // 10/05/2022 BZ - Added logic to find one tag by id.
+  // 10/05/2022 BZ - Added logic to find one tag by its id.
   const data = await Tag.findByPk(req.params.tag_id);
   return res.json(data);  
 });
