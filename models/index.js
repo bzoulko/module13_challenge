@@ -20,7 +20,6 @@ Product.belongsTo(Category, {
 // 10/05/2022 BZ - Added category correlation.
 Category.hasMany(Product, {
   foreignKey: 'id',
-  onDelete: 'CASCADE'
 });
 
 // Products belongToMany Tags (through ProductTag)
@@ -36,7 +35,6 @@ Product.belongsToMany(Tag, {
 Tag.belongsToMany(Product, {
   through: 'product_tag',
   foreignKey: 'tag_id',
-  onDelete: 'CASCADE'
 });
 
 module.exports = {

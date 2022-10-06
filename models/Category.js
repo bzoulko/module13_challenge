@@ -15,8 +15,8 @@ Category.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    catagory_name: {
-      type: DataTypes.UUID,
+    category_name: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
 

@@ -18,9 +18,10 @@ Product.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    producrt_name: {
+    product_name: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: "unknown",
     },
     price: {
       type: DataTypes.DOUBLE,
