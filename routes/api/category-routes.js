@@ -19,9 +19,15 @@ router.get('/', async (req, res) => {
   // find all categories
   // be sure to include its associated Products
 
-  // 10/05/2022 BZ - Added logic to return all products.
-  const data = await Category.findAll();
-  return res.json(data);  
+  // 10/05/2022 BZ - Added logic to return all categories.
+  try {
+    const categoryData = await Category.findAll({
+      include: [{ model: Product }],
+    });
+    res.status(200).json(categoryData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 router.get('/:id', async (req, res) => {
@@ -29,8 +35,18 @@ router.get('/:id', async (req, res) => {
   // be sure to include its associated Products
 
   // 10/05/2022 BZ - Added logic to find one category by its id.
-  const data = await Catagory.findByPk(req.params.catagory_id);
-  return res.json(data);  
+  try {
+    const categoryData = await Category.findByPk(req.params.id, {
+      include: [{ model: Product }],
+    });
+    if (!categoryData) {
+      res.status(404).json({ message: 'No category found with that id!' });
+      return;
+    }
+    res.status(200).json(categoryData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 router.post('/', async (req, res) => {
@@ -52,56 +68,45 @@ router.post('/', async (req, res) => {
       res.status(400).json(err);
   });
 
-
 });
 
 router.put('/:id', async (req, res) => {
   // update a category by its `id` value
 
-  // 10/05/2022 BZ - Made sure the body contained all the necessary parts before
-  //                 creating the new entry. Also added async/await to processes.
+  // 10/05/2022 BZ - Added update logic for category.
   // update catagory by its id.
-  await Catagory.update(req.body, {
+  await Category.update(req.body, {
     where: {
-      catagory_id: req.params.catagory_id,
+      id: req.params.id,
     },
   })
-    .then(async (catagory) => {
-      // find all associated catagories from catagory id.
-      return await Catagory.findAll({ where: { catagory_id: req.params.catagory_id } });
-    })
-    .then(async (productTags) => {
-      // get list of current tag_ids
-      const productTagIds = productTags.map(({ tag_id }) => tag_id);
-      // create filtered list of new tag_ids
-      const newProductTags = req.body.tagIds
-        .filter((tag_id) => !productTagIds.includes(tag_id))
-        .map((tag_id) => {
-          return {
-            product_id: req.params.id,
-            tag_id,
-          };
-        });
-      // figure out which ones to remove
-      const productTagsToRemove = productTags
-        .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
-        .map(({ id }) => id);
-
-      // run both actions
-      return Promise.all([
-        ProductTag.destroy({ where: { id: productTagsToRemove } }),
-        ProductTag.bulkCreate(newProductTags),
-      ]);
-    })
-    .then((updatedProductTags) => res.json(updatedProductTags))
-    .catch((err) => {
-      // console.log(err);
-      res.status(400).json(err);
+  .then(async (catagory) => {
+    // find all associated catagories from catagory id.
+    return await Category.findAll({ where: { id: catagory.id } });
+  })
+  .then((updateData) => res.json(updateData))
+  .catch((err) => {
+    // console.log(err);
+    res.status(400).json(err);
   });
+
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
+
+  // 10/05/2022 BZ - Add delete logic for category.
+  const data = await Category.destroy({
+    where: {
+        id: req.params.id 
+    }
+  })
+  if(data === 1) {
+      return res.json({ status: `Deleted category id = ${req.params.id}`});
+  } else {
+      return res.json({ status: `ERROR: Unable to delete category id = ${req.params.id}`});
+  }
+
 });
 
 module.exports = router;

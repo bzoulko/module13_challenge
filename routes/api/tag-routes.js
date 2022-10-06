@@ -20,8 +20,15 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Product data
 
   // 10/05/2022 BZ - Added logic to return all tags.
-  const data = await Tag.findAll();
-  return res.json(data);  
+  try {
+    const tagData = await Tag.findAll({
+      include: [{ model: Product }, { model: ProductTag }],
+    });
+    res.status(200).json(tagData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
 });
 
 router.get('/:id', async (req, res) => {
@@ -29,8 +36,18 @@ router.get('/:id', async (req, res) => {
   // be sure to include its associated Product data
 
   // 10/05/2022 BZ - Added logic to find one tag by its id.
-  const data = await Tag.findByPk(req.params.tag_id);
-  return res.json(data);  
+  try {
+    const tagData = await Tag.findByPk(req.params.id, {
+      include: [{ model: Product }, { model: ProductTag }],
+    });
+    if (!tagData) {
+      res.status(404).json({ message: 'No tag found with that id!' });
+      return;
+    }
+    res.status(200).json(tagData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 router.post('/', async (req, res) => {

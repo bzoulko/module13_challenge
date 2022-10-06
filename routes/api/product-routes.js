@@ -21,8 +21,15 @@ router.get('/', async(req, res) => {
   // be sure to include its associated Category and Tag data
   
   // 10/05/2022 BZ - Added logic to return all products.
-  const data = await Product.findAll();
-  return res.json(data);
+  try {
+    const productData = await Product.findAll({
+      include: [{ model: Category }, { model: Tag }],
+    });
+    res.status(200).json(productData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
 });
 
 // get one product
@@ -31,8 +38,18 @@ router.get('/:id', async(req, res) => {
   // be sure to include its associated Category and Tag data
   
   // 10/05/2022 BZ - Added logic to find one product by id.
-  const data = await Product.findByPk(req.params.id);
-  return res.json(data);
+  try {
+    const productData = await Product.findByPk(req.params.id, {
+      include: [{ model: Category }, { model: Tag }],
+    });
+    if (!ProductData) {
+      res.status(404).json({ message: 'No product found with that id!' });
+      return;
+    }
+    res.status(200).json(productData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // create new product
