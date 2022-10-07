@@ -85,7 +85,15 @@ This program is a server side application using node.js, express.js, dotenv, seq
 
 ### Screen Shots.
 * mysql login - database initialization
+![image](https://user-images.githubusercontent.com/108200823/194576589-ddc2eb85-1011-4609-8314-c1d4ca534a28.png)
+![image](https://user-images.githubusercontent.com/108200823/194576801-e48d2077-0c8f-4fcd-97d5-80a767dd013c.png)
+
 
 * npm run seed - Loads tables with test data.
+![image](https://user-images.githubusercontent.com/108200823/194576948-e4ec648b-86ed-41db-b162-ba8c76c7eba4.png)
+![image](https://user-images.githubusercontent.com/108200823/194577039-7e287167-4a00-4309-8810-30fc0d9aadea.png)
+![image](https://user-images.githubusercontent.com/108200823/194577180-b51824e9-bacb-449d-8172-b58627ab81df.png)
+
 
 * npm start - Starts server listening on LocalHost:3001
+![image](https://user-images.githubusercontent.com/108200823/194577455-71e45c0f-28e8-465a-94d5-a8e504e9cf0d.png)
