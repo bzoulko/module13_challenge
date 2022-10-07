@@ -1,5 +1,5 @@
 # Module 13 Chalenge - Oject-Relational Mapping (ORM) : E-commerce Back End
-This program is a server side application using node.js, express.js, dotenv, sequelize and mysql2. Since this is a server side application all functionality will be tested using a third party tool, and in this challenge, I will be using Insomnia to demonstrate the database connectivtiy. This "MySQL" database has 4 tables,  (Category, Tag, Product and ProductTag), with two tables having attributes of a "many to many" type relationship. As I demonstrate, you will see the columns available and what columns have what's called "foregn-keys" better known as table to table relationships. 
+This program is a server side application using node.js, express.js, dotenv, sequelize and mysql2. Since this is a server side application all functionality will be tested using a third party tool, and in this challenge, I will be using Insomnia to demonstrate the database connectivtiy. This "MySQL" database has 4 tables,  (Category, Tag, Product and ProductTag), with two tables having attributes of a "many to many" type relationship. As I demonstrate the ("DELETE" "PUT" "POST" "GET") operations, you will see how "foregn-keys" create the table to table relationships. 
 
 
 ## Running the E-Commerce back end server.
