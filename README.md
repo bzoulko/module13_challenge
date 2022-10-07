@@ -90,10 +90,11 @@ This program is a server side application using node.js, express.js, dotenv, seq
 
 
 * npm run seed - Loads tables with test data.
-![image](https://user-images.githubusercontent.com/108200823/194576948-e4ec648b-86ed-41db-b162-ba8c76c7eba4.png)
-![image](https://user-images.githubusercontent.com/108200823/194577039-7e287167-4a00-4309-8810-30fc0d9aadea.png)
-![image](https://user-images.githubusercontent.com/108200823/194577180-b51824e9-bacb-449d-8172-b58627ab81df.png)
+![image](https://user-images.githubusercontent.com/108200823/194578056-0e8cf64d-f867-4573-9af7-cf22b992529d.png)
+![image](https://user-images.githubusercontent.com/108200823/194578117-90d86e83-8393-41d4-9f33-b22aca81bd82.png)
+![image](https://user-images.githubusercontent.com/108200823/194578173-87c97eb7-d2cf-4d0f-a659-f5959e037701.png)
 
 
 * npm start - Starts server listening on LocalHost:3001
-![image](https://user-images.githubusercontent.com/108200823/194577455-71e45c0f-28e8-465a-94d5-a8e504e9cf0d.png)
+![image](https://user-images.githubusercontent.com/108200823/194578251-ab97da80-3363-4194-a940-d47c65bae638.png)
+![image](https://user-images.githubusercontent.com/108200823/194578305-776d153b-ac32-4509-9d48-a968f1f36d15.png)
