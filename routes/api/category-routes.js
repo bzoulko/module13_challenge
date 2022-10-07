@@ -54,19 +54,12 @@ router.post('/', async (req, res) => {
 
   // 10/05/2022 BZ - Made sure the body contained all the necessary parts before
   //                 creating the new entry. Also added async/await to processes.
-  await Catagory.create(req.body)
-    .then(async (catagory) => {
-      // if there's catagories, we need to create pairings to bulk create in the Catagory model
-      if (req.body.catagory_name.length) {
-        return await Category.create(req.body);
-      }
-      // if no product tags, just respond
-      res.status(200).json(catagory);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).json(err);
-  });
+  try {
+    const newCategory = await Category.create(req.body);
+    res.status(200).json(newCategory);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 
 });
 
@@ -75,14 +68,12 @@ router.put('/:id', async (req, res) => {
 
   // 10/05/2022 BZ - Added update logic for category.
   // update catagory by its id.
-  await Category.update(req.body, {
-    where: {
-      id: req.params.id,
-    },
-  })
-  .then(async (catagory) => {
+  await Category.update(req.body, { where: { id: req.params.id } })
+  .then(async () => {
     // find all associated catagories from catagory id.
-    return await Category.findAll({ where: { id: catagory.id } });
+    return await Category.findAll({ 
+      where: { id: req.params.id }
+    });
   })
   .then((updateData) => res.json(updateData))
   .catch((err) => {
@@ -96,11 +87,7 @@ router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
 
   // 10/05/2022 BZ - Add delete logic for category.
-  const data = await Category.destroy({
-    where: {
-        id: req.params.id 
-    }
-  })
+  const data = await Category.destroy({ where: { id: req.params.id } })
   if(data === 1) {
       return res.json({ status: `Deleted category id = ${req.params.id}`});
   } else {
