@@ -80,7 +80,7 @@ This program is a server side application using node.js, express.js, dotenv, seq
     - DotEnv : Handles our hidden enviornment variables.
 
 * Link to walkthrough video.
-
+https://drive.google.com/file/d/1Y-74sWL_jJlaBVlAThgcegFJNWgVU_ny/view
 
 
 ### Screen Shots.
